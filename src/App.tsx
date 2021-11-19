@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import RotationsGenerator from "./features/pairRotations/RotationsGenerator";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <AppBar title="Pair Rotations Generator" position="sticky">
+      <Container maxWidth="lg" component="section">
+        <Toolbar disableGutters component="section">
+          <Typography variant="h5" component="h1" noWrap>
+            Pair Rotations Generator
+          </Typography>
+        </Toolbar>
+      </Container>
+    </AppBar>
+    <main>
+      <Container maxWidth="lg" component="section" sx={{ paddingY: 3 }}>
+        <RotationsGenerator />
+      </Container>
+    </main>
+  </>
+);
 
 export default App;

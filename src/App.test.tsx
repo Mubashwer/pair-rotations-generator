@@ -1,9 +1,22 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+  it("should show app bar with 'Pair Rotations Generator' heading", () => {
+    render(<App />);
+
+    const appBar = screen.getByRole("banner");
+    expect(appBar).toBeVisible();
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading).toHaveTextContent("Pair Rotations Generator");
+  });
+
+  it("should display pair rotations generator", () => {
+    render(<App />);
+
+    const rotationsGenerator = screen.getByRole("article", {
+      name: "rotations generator",
+    });
+    expect(rotationsGenerator).toBeVisible();
+  });
 });
