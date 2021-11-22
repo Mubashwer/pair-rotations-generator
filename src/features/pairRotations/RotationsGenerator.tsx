@@ -16,7 +16,6 @@ const RotationsGenerator = (): JSX.Element => {
         multiple
         onChange={(_event, newMembers) => setMembers(newMembers)}
         options={Array<string>()}
-        value={members}
         renderInput={(params) => (
           <TextField
             {...params}
