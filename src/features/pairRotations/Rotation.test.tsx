@@ -1,7 +1,25 @@
 import Rotation from "./Rotation";
 import { render, screen, within } from "@testing-library/react";
+import { axe } from "jest-axe";
 
 describe("Rotation", () => {
+  it("should not have accessibility violations", async () => {
+    const rotationNumber = 1;
+    const pairs: [string, string][] = [
+      ["John", "Jane"],
+      ["Joe", "Dan"],
+    ];
+
+    const { container } = render(
+      <ul>
+        <Rotation rotationNumber={rotationNumber} pairs={pairs} />
+      </ul>
+    );
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
+  });
+
   it("should display rotation number", () => {
     const rotationNumber = 1;
     const pairs: [string, string][] = [

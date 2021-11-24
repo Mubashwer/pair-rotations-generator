@@ -1,7 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import App from "./App";
 
 describe("App", () => {
+  it("should not have accessibility violations", async () => {
+    const { container } = render(<App />);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
+  });
+
   it("should show app bar with 'Pair Rotations Generator' heading", () => {
     render(<App />);
 

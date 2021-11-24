@@ -2,8 +2,20 @@ import RotationsGenerator from "./RotationsGenerator";
 import { render, screen, within } from "@testing-library/react";
 import crypto from "crypto";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 
 describe("RotationsGenerator", () => {
+  it("should not have accessibility violations", async () => {
+    const { container } = render(<RotationsGenerator />);
+    const memberNamesInput = screen.getByRole("combobox", {
+      name: "member names",
+    });
+    enterMemberNames(memberNamesInput, 3);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
+  });
+
   describe("member names input", () => {
     it("should be displayed", () => {
       render(<RotationsGenerator />);
@@ -101,15 +113,6 @@ describe("RotationsGenerator", () => {
         "#".repeat(70)
       );
     });
-
-    const enterMemberNames = (memberNamesInput: HTMLElement, count: number) => {
-      while (count--) {
-        const memberName = crypto.randomBytes(8).toString("base64");
-        userEvent.type(memberNamesInput, `${memberName}{enter}`);
-        const memberNameChip = screen.getByRole("button", { name: memberName });
-        expect(memberNameChip).toBeVisible();
-      }
-    };
   });
 
   describe("rotation(s)", () => {
@@ -219,4 +222,13 @@ describe("RotationsGenerator", () => {
       expect(rotations).toBeEmptyDOMElement();
     });
   });
+
+  const enterMemberNames = (memberNamesInput: HTMLElement, count: number) => {
+    while (count--) {
+      const memberName = crypto.randomBytes(8).toString("base64");
+      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      const memberNameChip = screen.getByRole("button", { name: memberName });
+      expect(memberNameChip).toBeVisible();
+    }
+  };
 });

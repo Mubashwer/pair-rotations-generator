@@ -1,7 +1,17 @@
 import Rotations from "./Rotations";
 import { render, screen, within } from "@testing-library/react";
+import { axe } from "jest-axe";
 
 describe("Rotations", () => {
+  it("should not have accessibility violations", async () => {
+    const memberNames = ["John", "Jane", "Joe", "Dan"];
+
+    const { container } = render(<Rotations memberNames={memberNames} />);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
+  });
+
   it("should display rotations", () => {
     const memberNames = ["John", "Jane", "Joe", "Dan"];
 
