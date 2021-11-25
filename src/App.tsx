@@ -3,7 +3,7 @@ import RotationsGenerator from "./features/pairRotations/RotationsGenerator";
 
 const App = () => (
   <>
-    <AppBar title="Pair Rotations Generator" position="sticky">
+    <AppBar position="sticky">
       <Container maxWidth="lg" component="section">
         <Toolbar disableGutters component="section">
           <Typography variant="h5" component="h1" noWrap>
