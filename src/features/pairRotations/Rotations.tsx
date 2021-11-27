@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import { useMemo } from "react";
 import { generatePairRotations } from "./generatePairRotations";
 import Rotation from "./Rotation";
@@ -19,7 +19,13 @@ const Rotations = ({ memberNames }: RotationsProps): JSX.Element => {
   return (
     <List aria-label="rotations">
       {rotations.map((pairs, index) => (
-        <Rotation key={index} rotationNumber={index + 1} pairs={pairs} />
+        <ListItem
+          aria-label={`rotation ${index + 1}`}
+          key={index}
+          disableGutters
+        >
+          <Rotation rotationNumber={index + 1} pairs={pairs} />
+        </ListItem>
       ))}
     </List>
   );

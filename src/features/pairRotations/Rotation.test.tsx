@@ -11,9 +11,7 @@ describe("Rotation", () => {
     ];
 
     const { container } = render(
-      <ul>
-        <Rotation rotationNumber={rotationNumber} pairs={pairs} />
-      </ul>
+      <Rotation rotationNumber={rotationNumber} pairs={pairs} />
     );
     const results = await axe(container);
 
