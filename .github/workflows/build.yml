@@ -23,9 +23,14 @@ jobs:
       run: yarn install --frozen-lockfile
 
     - name: Run unit tests
-      run: yarn test --coverage .
+      run: yarn test --coverage
       env:
         CI: true
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        fail_ci_if_error: true
 
     - name: Build app for production
       run: yarn build
