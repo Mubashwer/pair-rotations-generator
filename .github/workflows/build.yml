@@ -29,10 +29,14 @@ jobs:
       run: yarn lint
 
     - name: Run unit tests
-      run: yarn test --watchAll=false
+      run: yarn test --coverage .
+      env:
+        CI: true
 
     - name: Build app for production
       run: yarn build
+      env:
+        CI: true
       
     - name: Upload build artifact
       if: ${{ github.event_name != 'pull_request' }}
