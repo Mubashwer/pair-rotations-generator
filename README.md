@@ -1,6 +1,7 @@
 # Pair Rotations Generator
 
 ![build status](https://github.com/mubashwer/pair-rotations-generator/actions/workflows/build.yml/badge.svg)
+[![codecov](https://codecov.io/gh/Mubashwer/pair-rotations-generator/branch/main/graph/badge.svg?token=UQKHK6MUGZ)](https://codecov.io/gh/Mubashwer/pair-rotations-generator)
 
 A simple SPA to generate Pair Rotations using the [Circle Method Scheduling Algorithm](https://en.wikipedia.org/wiki/Round-robin_tournament#Circle_method) for [Pair Programming](https://martinfowler.com/articles/on-pair-programming.html).
 
