@@ -58,10 +58,36 @@ jobs:
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: true
+        
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [unit-test, build]
+    needs: [unit-test, e2e-test, build]
     runs-on: ubuntu-latest
 
     steps:
