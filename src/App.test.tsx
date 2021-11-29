@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { axe } from "jest-axe";
 import App from "./App";
 
@@ -10,12 +10,12 @@ describe("App", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("should show app bar with 'Pair Rotations Generator' heading", () => {
+  it("should display app bar with 'Pair Rotations Generator' heading", () => {
     render(<App />);
 
     const appBar = screen.getByRole("banner");
     expect(appBar).toBeVisible();
-    const heading = screen.getByRole("heading", { level: 1 });
+    const heading = within(appBar).getByRole("heading", { level: 1 });
     expect(heading).toHaveTextContent("Pair Rotations Generator");
   });
 
