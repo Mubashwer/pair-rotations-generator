@@ -24,7 +24,7 @@ const RotationsGenerator = (): JSX.Element => {
               disabled: members.length >= maxMembers,
               maxLength: maxMemberNameLength,
             }}
-            placeholder="Add names (maximum 20, seperated by Enter)"
+            placeholder={`Add names (maximum ${maxMembers}, seperated by Enter)`}
             variant="standard"
           />
         )}
