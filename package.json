@@ -6,6 +6,7 @@
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.1",
+    "@semantic-release/git": "^10.0.1",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.1.0",
@@ -20,6 +21,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "semantic-release": "^18.0.1",
     "typescript": "^4.5.2",
     "web-vitals": "^1.0.1"
   },
@@ -53,6 +55,32 @@
     "collectCoverageFrom": [
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/reportWebVitals.ts"
+    ]
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "yarn.lock"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ],
+      "@semantic-release/github"
     ]
   }
 }
