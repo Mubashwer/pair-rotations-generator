@@ -8,27 +8,25 @@ export interface RotationsProps {
 }
 
 const Rotations = ({ memberNames }: RotationsProps): JSX.Element => {
-  const rotations = useMemo(() => {
-    const members = [...memberNames];
-    if (members.length % 2 !== 0) {
-      members.push("???");
-    }
-    return generatePairRotations(members);
-  }, [memberNames]);
+  return useMemo(() => {
+    const members =
+      memberNames.length % 2 === 0 ? [...memberNames] : [...memberNames, "???"];
+    const rotations = generatePairRotations(members);
 
-  return (
-    <List aria-label="rotations">
-      {rotations.map((pairs, index) => (
-        <ListItem
-          aria-label={`rotation ${index + 1}`}
-          key={index}
-          disableGutters
-        >
-          <Rotation rotationNumber={index + 1} pairs={pairs} />
-        </ListItem>
-      ))}
-    </List>
-  );
+    return (
+      <List aria-label="rotations">
+        {rotations.map((pairs, index) => (
+          <ListItem
+            aria-label={`rotation ${index + 1}`}
+            key={index}
+            disableGutters
+          >
+            <Rotation rotationNumber={index + 1} pairs={pairs} />
+          </ListItem>
+        ))}
+      </List>
+    );
+  }, [memberNames]);
 };
 
 export default Rotations;
