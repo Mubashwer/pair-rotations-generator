@@ -3,7 +3,6 @@
   "version": "1.0.2",
   "private": true,
   "dependencies": {
-    "@eclass/semantic-release-surge": "^1.0.9",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.1",
@@ -69,13 +68,6 @@
         "@semantic-release/npm",
         {
           "npmPublish": false
-        }
-      ],
-      [
-        "@eclass/semantic-release-surge",
-        {
-          "assets": "build",
-          "build": false
         }
       ],
       [
