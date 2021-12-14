@@ -111,10 +111,9 @@ jobs:
         name: build-artifact
         path: ./build
 
-    - name: Deploy to production
-      run: npx surge ./build ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
-
     - name: Release
       run: npx semantic-release
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        SURGE_ALIAS: ${{ secrets.SURGE_DOMAIN }}                
