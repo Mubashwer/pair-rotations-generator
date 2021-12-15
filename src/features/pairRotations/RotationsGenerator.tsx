@@ -19,6 +19,7 @@ const RotationsGenerator = (): JSX.Element => {
         renderInput={(params) => (
           <TextField
             {...params}
+            aria-label="add member names"
             inputProps={{
               ...params.inputProps,
               disabled: members.length >= maxMembers,
