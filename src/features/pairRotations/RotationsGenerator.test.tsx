@@ -190,7 +190,7 @@ describe("RotationsGenerator", () => {
       expect(pair).toHaveTextContent(`${memberNameA} & ???`);
     });
 
-    it("should be removed when all the entered member names are removed", async () => {
+    it("should be removed when all the entered member names are removed", () => {
       render(<RotationsGenerator />);
 
       const memberNamesInput = screen.getByRole("combobox", {
@@ -211,7 +211,7 @@ describe("RotationsGenerator", () => {
       expect(rotations).not.toBeInTheDocument();
     });
 
-    it("should be removed when the clear button is clicked", async () => {
+    it("should be removed when the clear button is clicked", () => {
       render(<RotationsGenerator />);
 
       const memberNamesInput = screen.getByRole("combobox", {
@@ -220,9 +220,7 @@ describe("RotationsGenerator", () => {
       const memberName = "Joe";
       userEvent.type(memberNamesInput, `${memberName}{enter}`);
 
-      const clearButton = await within(memberNamesInput).findByTestId(
-        "CloseIcon"
-      );
+      const clearButton = within(memberNamesInput).getByTestId("CloseIcon");
       userEvent.click(clearButton);
 
       const rotations = screen.queryByRole("list", {
