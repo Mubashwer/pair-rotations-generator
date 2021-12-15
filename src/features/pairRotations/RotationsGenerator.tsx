@@ -29,7 +29,7 @@ const RotationsGenerator = (): JSX.Element => {
           />
         )}
       />
-      <Rotations memberNames={members} />
+      {members.length > 0 && <Rotations memberNames={members} />}
     </article>
   );
 };

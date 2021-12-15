@@ -116,6 +116,15 @@ describe("RotationsGenerator", () => {
   });
 
   describe("rotation(s)", () => {
+    it("should not be present when the no member name has been entered", () => {
+      render(<RotationsGenerator />);
+
+      const rotations = screen.queryByRole("list", {
+        name: "rotations",
+      });
+      expect(rotations).not.toBeInTheDocument();
+    });
+
     it("should be generated when the first member name is entered", () => {
       render(<RotationsGenerator />);
 
@@ -196,10 +205,10 @@ describe("RotationsGenerator", () => {
       const cancelIcon = within(memberNameChip).getByTestId("CancelIcon");
       userEvent.click(cancelIcon);
 
-      const rotations = await screen.findByRole("list", {
+      const rotations = screen.queryByRole("list", {
         name: "rotations",
       });
-      expect(rotations).toBeEmptyDOMElement();
+      expect(rotations).not.toBeInTheDocument();
     });
 
     it("should be removed when the clear button is clicked", async () => {
@@ -216,10 +225,10 @@ describe("RotationsGenerator", () => {
       );
       userEvent.click(clearButton);
 
-      const rotations = await screen.findByRole("list", {
+      const rotations = screen.queryByRole("list", {
         name: "rotations",
       });
-      expect(rotations).toBeEmptyDOMElement();
+      expect(rotations).not.toBeInTheDocument();
     });
   });
 
