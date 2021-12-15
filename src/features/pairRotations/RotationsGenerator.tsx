@@ -21,7 +21,7 @@ const RotationsGenerator = (): JSX.Element => {
             {...params}
             inputProps={{
               ...params.inputProps,
-              ariaLabel: "add member names",
+              'aria-label': "add member names",
               disabled: members.length >= maxMembers,
               maxLength: maxMemberNameLength,
             }}
