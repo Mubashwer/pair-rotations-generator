@@ -7,10 +7,10 @@ import { axe } from "jest-axe";
 describe("RotationsGenerator", () => {
   it("should not have accessibility violations", async () => {
     const { container } = render(<RotationsGenerator />);
-    const memberNamesInput = screen.getByRole("combobox", {
+    const memberNamesCombobox = screen.getByRole("combobox", {
       name: "member names",
     });
-    enterMemberNames(memberNamesInput, 3);
+    enterMemberNames(memberNamesCombobox, 3);
     const results = await axe(container);
 
     expect(results).toHaveNoViolations();
@@ -20,20 +20,21 @@ describe("RotationsGenerator", () => {
     it("should be displayed", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
-      expect(memberNamesInput).toBeVisible();
+      expect(memberNamesCombobox).toBeVisible();
     });
 
     it("should have 'Add names (maximum 20, seperated by Enter)' placeholder", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
-      const memberNamesTextBox = within(memberNamesInput).getByRole("textbox");
-      expect(memberNamesTextBox).toHaveAttribute(
+      const memberNamesTextbox =
+        within(memberNamesCombobox).getByRole("textbox");
+      expect(memberNamesTextbox).toHaveAttribute(
         "placeholder",
         "Add names (maximum 20, seperated by Enter)"
       );
@@ -42,13 +43,13 @@ describe("RotationsGenerator", () => {
     it("should transform typed member name into a chip on pressing enter", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
-      const memberNameChip = within(memberNamesInput).getByRole("button", {
+      const memberNameChip = within(memberNamesCombobox).getByRole("button", {
         name: memberName,
       });
       expect(memberNameChip).toBeVisible();
@@ -57,29 +58,29 @@ describe("RotationsGenerator", () => {
     it("should remove member chip on pressing backspace", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
-      const memberNameChip = within(memberNamesInput).getByRole("button", {
+      const memberNameChip = within(memberNamesCombobox).getByRole("button", {
         name: memberName,
       });
-      userEvent.type(memberNamesInput, `{backspace}`);
+      userEvent.type(memberNamesCombobox, `{backspace}`);
       expect(memberNameChip).not.toBeInTheDocument();
     });
 
     it("should remove member chip on clicking cancel icon", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
-      const memberNameChip = within(memberNamesInput).getByRole("button", {
+      const memberNameChip = within(memberNamesCombobox).getByRole("button", {
         name: memberName,
       });
       const cancelIcon = within(memberNameChip).getByTestId("CancelIcon");
@@ -89,27 +90,27 @@ describe("RotationsGenerator", () => {
 
     it("should not allow any characters given 20 unique names have been entered", () => {
       render(<RotationsGenerator />);
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
-      enterMemberNames(memberNamesInput, 20);
+      enterMemberNames(memberNamesCombobox, 20);
 
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}`);
+      userEvent.type(memberNamesCombobox, `${memberName}`);
 
-      expect(within(memberNamesInput).getByRole("textbox")).toHaveValue("");
+      expect(within(memberNamesCombobox).getByRole("textbox")).toHaveValue("");
     });
 
     it("should not allow more than 70 characters for a member name", () => {
       render(<RotationsGenerator />);
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
 
       const memberName = "#".repeat(71);
-      userEvent.type(memberNamesInput, `${memberName}`);
+      userEvent.type(memberNamesCombobox, `${memberName}`);
 
-      expect(within(memberNamesInput).getByRole("textbox")).toHaveValue(
+      expect(within(memberNamesCombobox).getByRole("textbox")).toHaveValue(
         "#".repeat(70)
       );
     });
@@ -128,11 +129,11 @@ describe("RotationsGenerator", () => {
     it("should be generated when the first member name is entered", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
       const rotations = screen.getByRole("list", {
         name: "rotations",
@@ -143,11 +144,11 @@ describe("RotationsGenerator", () => {
     it("should be updated when a subsequent unique member name is entered", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberNameA = "Joe";
-      userEvent.type(memberNamesInput, `${memberNameA}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberNameA}{enter}`);
 
       const rotations = screen.getByRole("list", {
         name: "rotations",
@@ -158,20 +159,20 @@ describe("RotationsGenerator", () => {
       expect(pair).toHaveTextContent(`${memberNameA} & ???`);
 
       const memberNameB = "Jane";
-      userEvent.type(memberNamesInput, `${memberNameB}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberNameB}{enter}`);
       expect(pair).toHaveTextContent(`${memberNameA} & ${memberNameB}`);
     });
 
     it("should be updated when an entered member name is removed", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberNameA = "Joe";
-      userEvent.type(memberNamesInput, `${memberNameA}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberNameA}{enter}`);
       const memberNameB = "Jane";
-      userEvent.type(memberNamesInput, `${memberNameB}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberNameB}{enter}`);
 
       const rotations = screen.getByRole("list", {
         name: "rotations",
@@ -181,7 +182,7 @@ describe("RotationsGenerator", () => {
       });
       expect(pair).toHaveTextContent(`${memberNameA} & ${memberNameB}`);
 
-      const memberNameBChip = within(memberNamesInput).getByRole("button", {
+      const memberNameBChip = within(memberNamesCombobox).getByRole("button", {
         name: memberNameB,
       });
       const cancelIcon = within(memberNameBChip).getByTestId("CancelIcon");
@@ -193,13 +194,13 @@ describe("RotationsGenerator", () => {
     it("should be removed when all the entered member names are removed", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
-      const memberNameChip = within(memberNamesInput).getByRole("button", {
+      const memberNameChip = within(memberNamesCombobox).getByRole("button", {
         name: memberName,
       });
       const cancelIcon = within(memberNameChip).getByTestId("CancelIcon");
@@ -214,13 +215,13 @@ describe("RotationsGenerator", () => {
     it("should be removed when the clear button is clicked", () => {
       render(<RotationsGenerator />);
 
-      const memberNamesInput = screen.getByRole("combobox", {
+      const memberNamesCombobox = screen.getByRole("combobox", {
         name: "member names",
       });
       const memberName = "Joe";
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
 
-      const clearButton = within(memberNamesInput).getByTestId("CloseIcon");
+      const clearButton = within(memberNamesCombobox).getByTestId("CloseIcon");
       userEvent.click(clearButton);
 
       const rotations = screen.queryByRole("list", {
@@ -230,10 +231,13 @@ describe("RotationsGenerator", () => {
     });
   });
 
-  const enterMemberNames = (memberNamesInput: HTMLElement, count: number) => {
+  const enterMemberNames = (
+    memberNamesCombobox: HTMLElement,
+    count: number
+  ) => {
     while (count--) {
       const memberName = crypto.randomBytes(8).toString("base64");
-      userEvent.type(memberNamesInput, `${memberName}{enter}`);
+      userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
       const memberNameChip = screen.getByRole("button", { name: memberName });
       expect(memberNameChip).toBeVisible();
     }
