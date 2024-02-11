@@ -1,5 +1,5 @@
 import { generatePairRotations, Pair } from "./generatePairRotations";
-import crypto from "crypto";
+import { randomBytes } from "crypto";
 
 describe("generatePairRotations", () => {
   describe("given there are 0 members", () => {
@@ -68,7 +68,7 @@ describe("generatePairRotations", () => {
 
 const generateMembers = (count: number) => {
   const members = [...Array(count)].map(() =>
-    crypto.randomBytes(8).toString("base64")
+    randomBytes(8).toString("base64")
   );
   members.push(members[0]); // adding a duplicate
   return members;
