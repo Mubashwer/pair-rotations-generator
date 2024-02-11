@@ -28,6 +28,9 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "eslint ./src",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
