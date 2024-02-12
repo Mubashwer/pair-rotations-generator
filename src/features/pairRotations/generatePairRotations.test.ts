@@ -67,7 +67,7 @@ describe("generatePairRotations", () => {
 });
 
 const generateMembers = (count: number) => {
-  const members = [...Array(count)].map(() =>
+  const members = [...(Array(count) as number[])].map(() =>
     randomBytes(8).toString("base64")
   );
   members.push(members[0]); // adding a duplicate
