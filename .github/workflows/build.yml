@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-artifact
-        path: ./build
+        path: ./dist
 
   unit-test:
     runs-on: ubuntu-latest
@@ -109,10 +109,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: build-artifact
-        path: ./build
+        path: ./dist
 
     - name: Deploy to production
-      run: npx surge ./build ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+      run: npx surge ./dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
 
     - name: Release
       run: npx semantic-release
