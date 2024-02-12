@@ -1,5 +1,0 @@
-{
-  "baseUrl": "http://localhost:3000",
-  "chromeWebSecurity": false,
-  "integrationFolder": "cypress/e2e-tests"
-}

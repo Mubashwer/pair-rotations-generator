@@ -61,7 +61,7 @@ describe("App", () => {
   const mockMatchMedia = (...matches: string[]) => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn((query) => ({
+      value: jest.fn((query: string) => ({
         matches: matches.includes(query),
         media: query,
         onchange: null,

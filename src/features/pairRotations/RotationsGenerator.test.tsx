@@ -1,6 +1,6 @@
 import RotationsGenerator from "./RotationsGenerator";
 import { render, screen, within } from "@testing-library/react";
-import crypto from "crypto";
+import { randomBytes } from "crypto";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
@@ -236,7 +236,7 @@ describe("RotationsGenerator", () => {
     count: number
   ) => {
     while (count--) {
-      const memberName = crypto.randomBytes(8).toString("base64");
+      const memberName = randomBytes(8).toString("base64");
       userEvent.type(memberNamesCombobox, `${memberName}{enter}`);
       const memberNameChip = screen.getByRole("button", { name: memberName });
       expect(memberNameChip).toBeVisible();

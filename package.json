@@ -1,60 +1,93 @@
 {
   "name": "pair-rotations-generator",
   "version": "1.1.4",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.4",
     "@semantic-release/git": "^10.0.1",
-    "@testing-library/cypress": "^8.0.2",
+    "@testing-library/cypress": "^10.0.1",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.0.3",
+    "@types/jest": "^29.5.12",
     "@types/jest-axe": "^3.5.3",
-    "@types/node": "^17.0.0",
+    "@types/node": "^20.11.17",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.0",
-    "cypress": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "cypress": "^13.6.4",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "jest": "^29.7.0",
     "jest-axe": "^5.0.1",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
     "semantic-release": "^18.0.1",
-    "typescript": "^4.5.2",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.1",
+    "vite-tsconfig-paths": "^4.3.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "eslint ./src",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "test": "jest",
+    "preview": "vite preview",
+    "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "Chrome >= 85",
+      "Edge >= 85",
+      "Safari >= 14.1",
+      "Firefox >= 86",
+      "iOS >= 14.5",
+      "Samsung >= 14.0"
     ],
     "development": [
       "last 1 chrome version",
+      "last 1 edge version",
+      "last 1 safari version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 ios version",
+      "last 1 samsung version"
     ]
   },
   "jest": {
+    "preset": "ts-jest/presets/default-esm",
+    "transform": {
+      "^.+\\.(ts|tsx)?$": [
+        "ts-jest",
+        {
+          "tsconfig": {
+            "esModuleInterop": true
+          }
+        }
+      ]
+    },
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.ts"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/cypress/"
+    ],
     "collectCoverageFrom": [
+      "<rootDir>/src/**/*",
       "!<rootDir>/src/index.tsx",
-      "!<rootDir>/src/reportWebVitals.ts"
+      "!<rootDir>/src/reportWebVitals.ts",
+      "!<rootDir>/src/vite-env.d.ts"
     ]
   },
   "release": {
